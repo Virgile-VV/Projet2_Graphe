@@ -12,7 +12,7 @@ Cgraphe::Cgraphe()
 }
 
 //Methode permettant d'ajouter un sommet au graphe
-Csommet* Cgraphe::GRAAjouterSommet(Csommet & SOMNouveauSommet) {
+void Cgraphe::GRAAjouterSommet(Csommet & SOMNouveauSommet) {
 	//on incremente le nombre de sommet dans le graphe
 	iGRANbSommet++;
 	//on rajoute une case dans le tableau
@@ -20,7 +20,7 @@ Csommet* Cgraphe::GRAAjouterSommet(Csommet & SOMNouveauSommet) {
 	//on cree le pointeur vers le sommet que nous allons ajouter dan le tableau
 
 	ppSOMGRATableauSommets[iGRANbSommet - 1] = &SOMNouveauSommet;
-	return &SOMNouveauSommet;
+	//return &SOMNouveauSommet;
 }
 
 
