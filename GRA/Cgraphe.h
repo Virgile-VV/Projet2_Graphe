@@ -18,7 +18,7 @@ public:
 	Cgraphe();
 
 	void GRAAjouterArc(Csommet & SOMSommetDestination, Csommet & SOMSommetDepart);
-	Csommet* GRAAjouterSommet(Csommet & SOMNouveauSommet);
+	void GRAAjouterSommet(Csommet & SOMNouveauSommet);
 
 	void GRAAfficherGraphe();
 	Csommet* GRALireTableauSommet(unsigned int uiPosition);
