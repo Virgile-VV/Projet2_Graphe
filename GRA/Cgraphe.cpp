@@ -41,7 +41,6 @@ void Cgraphe::GRAAjouterArc(Csommet & SOMSommetDepart, Csommet & SOMSommetDestin
 void Cgraphe::GRAAfficherGraphe() {
 
 	for (int iCpt = 0; iCpt < iGRANbSommet; iCpt++) {
-		cout << ppSOMGRATableauSommets[iCpt]->SOMLireSommet() << ", " << endl;
 
 		cout << "Le sommet " << (ppSOMGRATableauSommets[iCpt])->SOMLireSommet() << " pointe les sommets : ";
 		(ppSOMGRATableauSommets[iCpt])->SOMAfficherPartant();
@@ -60,7 +59,6 @@ void Cgraphe::GRAAfficherGraphe() {
 
 Csommet * Cgraphe::GRALireTableauSommet(unsigned int uiPosition)
 {
-	//cout << "oui" << (ppSOMGRATableauSommets[0])->SOMLireSommet() << endl;
 	return ((ppSOMGRATableauSommets[0]));
 }
 
