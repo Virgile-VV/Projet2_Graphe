@@ -1,0 +1,29 @@
+#pragma once
+
+
+#ifndef _CGRAPHE_H_
+#define _CGRAPHE_H_
+
+#include "Csommet.h"
+
+class Cgraphe {
+private:
+	int iGRANbSommet;
+	//tableau qui contient des pointeurs vers des Sommets
+	Csommet** ppSOMGRATableauSommets;
+
+
+public:
+
+	Cgraphe();
+
+	void GRAAjouterArc(Csommet & SOMSommetDestination, Csommet & SOMSommetDepart);
+	Csommet* GRAAjouterSommet(Csommet & SOMNouveauSommet);
+
+	void GRAAfficherGraphe();
+	Csommet* GRALireTableauSommet(unsigned int uiPosition);
+
+
+};
+
+#endif // !_CGRAPHE_H_
