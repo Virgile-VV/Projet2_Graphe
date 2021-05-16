@@ -19,6 +19,8 @@ public:
 
 	void GRAAjouterArc(Csommet & SOMSommetDestination, Csommet & SOMSommetDepart);
 	void GRAAjouterSommet(Csommet & SOMNouveauSommet);
+	
+	void GRASupprimerSommet(Csommet* pSOMSommet); 
 
 	void GRAAfficherGraphe();
 	Csommet* GRALireTableauSommet(unsigned int uiPosition);
