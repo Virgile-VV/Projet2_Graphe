@@ -1,0 +1,52 @@
+void Cgraphe::GRASupprimerSommet(CSommet* pSOMSommet)
+{
+	if (iGRANbSommet == 0)
+	{
+		cerr << "Le graphe n'a pas de sommets";
+	}
+
+	CSommet** ppSOMGRATableauTemp;
+	unsigned int uiNumeroSommet = pSOMSommet->SOMLireSommet();
+	bool SommetPresent = false;
+
+	for (unsigned int uiBoucle = 0; uiBoucle < iGRANbSommet; uiBoucle++)
+	{
+		if (uiNumeroSommet == ppSOMGRATableauSommets[uiBoucle]->SOMLireSommet())
+		{
+			SommetPresent = true;
+			delete(ppSOMGRATableauSommets[uiBoucle]);
+			for (unsigned int uiSommet = uiBoucle; uiSommet < iGRANbSommet - 1; ++uiSommet)
+				ppSOMGRATableauSommets[uiSommet] = ppSOMGRATableauSommets[uiSommet + 1];
+		}
+	}
+
+	if (SommetPresent == false)
+	{
+		cerr << "Le sommet n'est pas présent dans le graphe";
+	}
+	else
+	{
+		pSOMGRATableauTemp = (Csommet**)realloc(ppSOMGRATableauSommets, (iGRANbSommet - 1) * sizeof(Csommet*));
+
+		if (pSOMGRATableauTemp != nullptr || iGRANbSommet - 1 == 0)
+		{
+			iGRANbSommet--;
+			ppSOMGRATableauSommets = pSOMGRATableauTemp;
+
+			//On supprime les arcs allant vers ce sommet des autres sommets du graphe
+			for (unsigned int uiBoucle = 0; uiBoucle < iGRANbSommet; ++uiBoucle)
+			{
+				for (unsigned int uiBouclePartant = 0; uiBouclePartant <ppSOMGRATableauSommets[uiBoucle]->SOMLireTaillePartant(); uiBouclePartant++)
+				{
+					if (ppSOMGRATableauSommets[uiBoucle]->SOMLirePartant()[uiBouclePartant]->ARCLireDestination() == uiNumeroSommet)
+						ppSOMGRATableauSommets[uiBoucle]->SOMSupprimerArcPartant(new Carc(uiNumeroSommet));
+				}
+				for (unsigned int uiBoucleArrivant = 0; uiBoucleArrivant <ppSOMGRATableauSommets[uiBoucle]->SOMLireTailleArrivant(); uiBoucleArrivant++)
+				{
+					if (ppSOMGRATableauSommets[uiBoucle]->SOMLireArrivant()[uiBoucleArrivant]->ARCLireDestination() == uiNumeroSommet)
+						ppSOMGRATableauSommets[uiBoucle]->SOMSupprimerArcArrivant(new Carc(uiNumeroSommet));
+				}
+			}
+		}
+	}
+}
