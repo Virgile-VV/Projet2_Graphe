@@ -3,8 +3,8 @@
 #include "Csommet.h"
 using namespace std;
 
-/** Constructeur par défaut
-*
+/**
+* Constructeur par défaut
 */
 Csommet::Csommet() {
 	uiSOMNbPartant = 0;
@@ -12,8 +12,8 @@ Csommet::Csommet() {
 }
 
 
-/** Constructeur par défaut
-*
+/**
+* Constructeur
 */
 Csommet::Csommet(unsigned int uiNumeroSommet) {
 	uiSOMNumero = uiNumeroSommet;
@@ -21,25 +21,24 @@ Csommet::Csommet(unsigned int uiNumeroSommet) {
 	uiSOMNbArrivant = 0;
 }
 
-//Csommet::~Csommet() {
-
-//}
-
 
 /**
 * Ajout d'un élément au tableau des arcs partant
+*
+* renvoie un booléen
+*	true : si l'arc a été ajouté
+*	false : si l'arc n'a pas été ajouté
 */
-void Csommet::SOMAjouteArcPartant(Carc &ARCPartant)
+bool Csommet::SOMAjouteArcPartant(Carc &ARCPartant)
 {
 	//d'abord on parcours le tableau 
 	int iDeuxArcMemeDestination = 0;
-	
+
 	for (int iCpt = 0; iCpt < uiSOMNbPartant; iCpt++) {
-		cout << "oui";
 		if (ppARCSOMPartant[iCpt]->ARCLireDestination() == ARCPartant.ARCLireDestination()) {
 			iDeuxArcMemeDestination = 1;
 
-			cerr << "L'arc poitant vers "<< ppARCSOMPartant[iCpt]->ARCLireDestination() <<" dans la table des arc partant du sommet" << SOMLireSommet();
+			cerr << "L'arc poitant vers " << ppARCSOMPartant[iCpt]->ARCLireDestination() << " dans la table des arc partant du sommet" << SOMLireSommet();
 			cerr << "n'a pas pu être ajouté car un arc pointe deja vers cette destination" << endl;
 		}
 	}
@@ -53,7 +52,10 @@ void Csommet::SOMAjouteArcPartant(Carc &ARCPartant)
 		//ajout de l'élément dans la case (somme de tous les partant - 1) puisque le tab commence a 0
 		ppARCSOMPartant[uiSOMNbPartant - 1] = &ARCPartant;
 		//cout << ppARCSOMPartant[0];
+		return true;
 	}
+	return false;
+
 }
 
 
@@ -75,13 +77,20 @@ void Csommet::SOMAjouteArcArrivant(Carc &ARCArrivant)
 }
 
 
-
+/**
+* Renvoie un unigned int
+*	Le numero du sommet qui appelle la méthode
+*/
 unsigned int Csommet::SOMLireSommet()
 {
 	return uiSOMNumero;
 }
 
-void Csommet::SOMAfficherPartant(void) 
+
+/**
+* Affiche dans la console les arcs partants
+*/
+void Csommet::SOMAfficherPartant(void)
 {
 	for (unsigned int uiCpt = 0; uiCpt < uiSOMNbPartant; uiCpt++) {
 		cout << ppARCSOMPartant[uiCpt]->ARCLireDestination() << ", ";
@@ -91,5 +100,8 @@ void Csommet::SOMAfficherPartant(void)
 
 void Csommet::SOMAfficherNbArrivant(void)
 {
-		cout << uiSOMNbArrivant;
+	cout << uiSOMNbArrivant;
 }
+
+
+
